@@ -5,53 +5,190 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Priya Swain | Talent Acquisition</title>
   <style>
-    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #0f172a; color: white; }
-    header { padding: 60px 20px; text-align: center; }
-    h1 { font-size: 40px; margin-bottom: 10px; }
-    p { color: #cbd5f5; }
-    section { max-width: 900px; margin: auto; padding: 40px 20px; }
-    .card { background: #1e293b; padding: 25px; border-radius: 16px; margin-bottom: 20px; }
-    a { color: #38bdf8; text-decoration: none; }
-    .btn { display: inline-block; margin-top: 15px; padding: 10px 20px; background: #38bdf8; color: black; border-radius: 8px; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      background: radial-gradient(circle at 30% 20%, #a78bfa 0%, #0f172a 40%, #020617 100%);
+      overflow-x: hidden;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 40px;
+    }
+
+    nav a {
+      color: #ddd6fe;
+      margin-left: 20px;
+      text-decoration: none;
+    }
+
+    header {
+      text-align: center;
+      padding: 120px 20px 80px;
+    }
+
+    h1 {
+      font-size: 52px;
+    }
+
+    .subtitle {
+      color: #c4b5fd;
+      font-size: 18px;
+    }
+
+    .btn {
+      margin-top: 25px;
+      display: inline-block;
+      padding: 12px 26px;
+      background: linear-gradient(90deg, #a78bfa, #38bdf8);
+      color: black;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 0 20px rgba(167,139,250,0.6);
+    }
+
+    section {
+      max-width: 900px;
+      margin: auto;
+      padding: 60px 20px;
+    }
+
+    .card {
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(12px);
+      padding: 25px;
+      border-radius: 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    }
+
+    img {
+      width: 100%;
+      border-radius: 12px;
+      margin-top: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #a1a1aa;
+    }
   </style>
 </head>
 <body>
 
+<canvas id="bg"></canvas>
+
+<nav>
+  <div><strong>Priya</strong></div>
+  <div>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
 <header>
-  
   <h1>Hi, I’m Priya 👋</h1>
-<p>Talent Acquisition professional blending recruiting with AI & data-driven hiring</p>
+  <p class="subtitle">Talent Acquisition professional blending recruiting with AI & data-driven hiring</p>
   <a class="btn" href="https://www.linkedin.com/in/priya-swain/" target="_blank">Connect on LinkedIn</a>
 </header>
-  <p style="margin-top: 15px; font-size: 16px; color: #94a3b8;">
-      Currently exploring how AI can make hiring more efficient without losing the human touch.
-</p>
 
-<section>
+<section id="about">
   <div class="card">
     <h2>About Me</h2>
-<p>I’m a Talent Acquisition professional with experience in hiring and stakeholder management, now exploring how AI and data can transform the way we recruit. I’m passionate about making hiring smarter, faster, and more human.</p>  </div>
-
-  <div class="card">
-    <h2>What I’m Building</h2>
-    <ul>
-  <li>Building an AI-powered resume screening approach (in progress)</li>
-  <li>Created a recruitment analytics dashboard using Excel</li>
-  <li>Exploring automation in candidate sourcing and screening</li>
-</ul>
+    <p>I’m a Talent Acquisition professional with experience in hiring and stakeholder management, now exploring how AI and data can transform recruitment.</p>
   </div>
+</section>
 
+<section id="projects">
   <div class="card">
-    <h2>Skills</h2>
-    <p>Talent Acquisition | Stakeholder Management | HR Analytics | Excel | AI Tools</p>
-  </div>
+    <h2>Projects</h2>
+    <h3>Recruitment Analytics Dashboard</h3>
+    <p>Built an Excel-based dashboard to track candidate sources and hiring trends.</p>
+    <img src="dashboard.png" alt="Dashboard">
 
+    <h3 style="margin-top:20px;">AI Resume Screening</h3>
+    <p>Exploring AI-driven approaches to resume screening.</p>
+  </div>
+</section>
+
+<section id="contact">
   <div class="card">
     <h2>Contact</h2>
     <p>Email: <a href="mailto:priyadarsini.swain94@gmail.com">priyadarsini.swain94@gmail.com</a></p>
     <p>LinkedIn: <a href="https://www.linkedin.com/in/priya-swain/" target="_blank">View Profile</a></p>
   </div>
 </section>
+
+<footer>
+  <p>© 2026 Priya Swain</p>
+</footer>
+
+<script>
+const canvas = document.getElementById('bg');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+for (let i = 0; i < 60; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    vx: (Math.random() - 0.5) * 1,
+    vy: (Math.random() - 0.5) * 1
+  });
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  particles.forEach(p => {
+    p.x += p.vx;
+    p.y += p.vy;
+
+    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+    ctx.fillStyle = '#a78bfa';
+    ctx.fill();
+  });
+
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      let dx = particles[i].x - particles[j].x;
+      let dy = particles[i].y - particles[j].y;
+      let dist = Math.sqrt(dx * dx + dy * dy);
+
+      if (dist < 120) {
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.strokeStyle = 'rgba(167,139,250,0.2)';
+        ctx.stroke();
+      }
+    }
+  }
+
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
 
 </body>
 </html>
